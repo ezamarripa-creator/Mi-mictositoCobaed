@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDIEMS 2026-2027</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1e3a5f;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Main content */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+    width: 100%;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+h1 {
+    color: #1e3a5f;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #f2f2f2;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+}
+
+/* Calendar */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #1e3a5f;
+    color: white;
+}
+
+/* Button */
+button {
+    background: #1e3a5f;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16304a;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .content {
+        margin-left: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>EDIEMS 2026-2027</h2>
+    <a href="#inicio">Inicio</a>
+    <a href="#calendario">Calendario</a>
+    <a href="#estrategia">Estrategia</a>
+    <a href="#materiales">Materiales</a>
+    <a href="#evaluacion">Evaluación</a>
+    <a href="#curso">Curso</a>
+</div>
+
+<div class="content">
+
+<!-- INICIO -->
+<div id="inicio" class="section">
+    <h1>Estrategia de Ingreso a EMS</h1>
+    <p>Micrositio institucional para la organización del proceso diagnóstico 2026-2027.</p>
+
+    <button onclick="scrollToSection('calendario')">Ver Calendario</button>
+</div>
+
+<!-- CALENDARIO -->
+<div id="calendario" class="section">
+    <h1>Calendario 2026-2027</h1>
+
+    <table>
+        <tr>
+            <th>Evento</th>
+            <th>Fecha</th>
+        </tr>
+        <tr>
+            <td>Test Diagnóstico</td>
+            <td>Agosto 2026</td>
+        </tr>
+        <tr>
+            <td>Curso Propedéutico</td>
+            <td>Agosto - Septiembre 2026</td>
+        </tr>
+        <tr>
+            <td>Inicio de Semestre</td>
+            <td>Septiembre 2026</td>
+        </tr>
+        <tr>
+            <td>Postest</td>
+            <td>Diciembre 2026</td>
+        </tr>
+    </table>
+
+    <br>
+    <button onclick="descargarCSV()">Descargar Calendario</button>
+</div>
+
+<!-- ESTRATEGIA -->
+<div id="estrategia" class="section">
+    <h1>Estrategia Educativa</h1>
+    <p>Evaluación diagnóstica en áreas clave:</p>
+    <ul>
+        <li>Lenguaje</li>
+        <li>Matemáticas</li>
+        <li>Ciencias</li>
+        <li>Ciencias Sociales</li>
+    </ul>
+</div>
+
+<!-- MATERIALES -->
+<div id="materiales" class="section">
+    <h1>Materiales</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Guía</h3>
+            <button onclick="alert('Descarga simulada')">Descargar</button>
+        </div>
+
+        <div class="card">
+            <h3>Manual</h3>
+            <button onclick="alert('Descarga simulada')">Descargar</button>
+        </div>
+
+        <div class="card">
+            <h3>Test</h3>
+            <button onclick="alert('Descarga simulada')">Descargar</button>
+        </div>
+    </div>
+</div>
+
+<!-- EVALUACION -->
+<div id="evaluacion" class="section">
+    <h1>Evaluación Diagnóstica</h1>
+    <ol>
+        <li>Aplicación</li>
+        <li>Captura</li>
+        <li>Análisis</li>
+        <li>Intervención</li>
+    </ol>
+</div>
+
+<!-- CURSO -->
+<div id="curso" class="section">
+    <h1>Curso Propedéutico</h1>
+    <p>Duración: 2 semanas</p>
+</div>
+
+</div>
+
+<script>
+
+/* Navegación */
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+/* Descargar calendario en CSV */
+function descargarCSV() {
+    const data = [
+        ["Evento", "Fecha"],
+        ["Test Diagnóstico", "Agosto 2026"],
+        ["Curso Propedéutico", "Agosto-Septiembre 2026"],
+        ["Inicio de Semestre", "Septiembre 2026"],
+        ["Postest", "Diciembre 2026"]
+    ];
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + data.map(e => e.join(",")).join("\n");
+
+    const link = document.createElement("a");
+    link.setAttribute("href", encodeURI(csvContent));
+    link.setAttribute("download", "calendario_ediems.csv");
+    document.body.appendChild(link);
+
+    link.click();
+}
+
+</script>
+
+</body>
+</html>
